@@ -11,6 +11,12 @@ blueText   = '\033[36m'
 purpleText = '\033[35m'
 reset      = '\033[0m' # Reset text colour to default
 
+def intInput(vraag):
+    userInput = 'a'
+    while not userInput.isdigit():
+        userInput = input(vraag)
+    return int(userInput)
+
 
 # Generate and print ASCII art
 def  asciiArt1(userName):
@@ -22,11 +28,11 @@ def  asciiArt1(userName):
 
 # Menu
 def startGame1(userName):
-    players = int(input(f"Would you like : (Numbers only!)\n{blueText}| multiplayer [1] | singleplayer [2] |\n{reset}  "))
+    players = input(f"Would you like : (Numbers only!)\n{blueText}| multiplayer [1] | singleplayer [2] |\n{reset}  ").lower()
 
-    if   players == 1:
+    if   players == '1' or players == 'multiplayer':
         multiPlayer(userName)
-    elif players == 2:
+    elif players == '2' or players == 'singleplayer':
         singlePlayer(userName)
     else:
         print(f"{redText}Invalid option!{reset}")
@@ -68,15 +74,15 @@ def singlePlayer(userName):
 def multiPlayer(userName):
     guessCount = 1
     userName2  = input("What username does player 2 want to play with: ")
-    number     = int(input(f"{userName}, please pick a number:  "))
-    maxGuesses = int(input(f"How many guesses does {userName2} get:  "))
+    number     = intInput(f"{userName}, please pick a number:  ")
+    maxGuesses = intInput(f"How many guesses does {userName2} get:  ")
 
     os.system('cls')  # Clear the terminal (Only for Windows)
     #os.system('clear') #Clear the terminal (Linux and macOS)
     print(f"{userName2}, you have {maxGuesses} guesses.")
 
     # Start the game and bring variables along
-    playGame(guessCount, maxGuesses, number, None, userName)
+    playGame(guessCount, maxGuesses, number, None, userName2)
 
 
 # All the game logic
@@ -95,9 +101,9 @@ def playGame(guessCount, maxGuesses, number, difficultyRange, userName):
                 continue
 
         # Give feedback on the guess
-        if   guess > number and guessCount>1:
+        if   guess > number and guessCount >= 1:
             print("Lower!")
-        elif guess < number and guessCount>1:
+        elif guess < number and guessCount >= 1:
             print("higher!")
         elif guess == number:
             print(f"{greenText}You have guessed correctly in {guessCount} guesses, congrats :)!{reset}")

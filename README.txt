@@ -54,5 +54,3 @@ Important information
  - Main.py in line 47
  - Game01.py in line 74
  - Game02.py in line 57
-
-

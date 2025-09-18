@@ -22,20 +22,19 @@ def asciiArt2(userName):
 
 # Menu
 def startGame2(userName): 
-    players = int(input(f"Would you like : (Numbers only!)\n{blueText}| multiplayer [1] | singleplayer [2] |\n{reset}  "))
+    players = 0
+    while players not in ['1', '2', 'singleplayer', 'multiplayer']:
+        players = input(f"Would you like :\n{blueText}| singleplayer [1] | multiplayer [2] |\n{reset}  ").lower()
 
-    if   players == 1:
+    if   players == '2' or players == 'multiPlayer':
         multiPlayer(userName)
-    elif players == 2:
+    elif players == '1' or players == 'singleplayer':
         singlePlayer(userName)
-    else:
-        print(f"{redText}Please choose any of the options above.{reset}")
-        startGame2(userName) # Ask again
 
 
 # Set up for the singleplayer option
 def singlePlayer(userName):
-    with open('mostCommonWords.txt') as openFile:
+    with open('C:/Users/aimbl/Desktop/Git-project/mostCommonWords.txt') as openFile:
         words = openFile.readlines()
 
     words      = [word.strip() for word in words]
@@ -112,8 +111,8 @@ hangMan = [
        ------
        |    |
        O    |
-      /|\\  |
-            |
+      /|\\   |
+             |
             |
     =========
     """,  # 5 mistakes
@@ -121,8 +120,8 @@ hangMan = [
        ------
        |    |
        O    |
-      /|\\  |
-      /     |
+      /|\\   |
+      /      |
             |
     =========
     """,  # 6 mistakes
@@ -130,8 +129,8 @@ hangMan = [
        ------
        |    |
        O    |
-      /|\\  |
-      / \\  |
+      /|\\   |
+      / \\   |
             |
     =========
     """  # 7 mistakes
@@ -148,8 +147,10 @@ def playGame(word, guessCount, maxGuesses):
     print(notGuessedYet) # Display the beginning state of the word
 
     # Loop until the user is out of guesses and the word is not guesses yet
-    while guessCount < maxGuesses and "_" in notGuessedYet:
-        guess = input(f"Make your guess, {maxGuesses - guessCount} guesses left:  ").lower()
+    while (guessCount < maxGuesses) and ("_" in notGuessedYet):
+        guess = 0
+        while guess not in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
+            guess = input(f"Make your guess, {maxGuesses - guessCount} guesses left:  ").lower()
         
         if  guess in guessedLetters:
             print("You have already guessed this letter!")

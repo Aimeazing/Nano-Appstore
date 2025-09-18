@@ -19,6 +19,7 @@ reset      = '\033[0m' # Reset text colour to default
 ascii_art = pyfiglet.figlet_format("Apptitude")
 print(purpleText, ascii_art, reset)
 
+
 # User has to log in with a username and password
 def login():
     userName = input(f"{blueText}Please type your username: {reset}")
@@ -42,6 +43,7 @@ def login():
         passwordGuess = input(f"{blueText}Please enter your password: {reset}")
 
     menu(userName)
+
 
 def menu(userName):
     while True: # Looping until user chooses to exit

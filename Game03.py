@@ -10,9 +10,8 @@ blueText   = '\033[36m'
 purpleText = '\033[35m'
 reset      = '\033[0m' # Reset text colour to default
 
-
 # Generate and print ASCII art
-def  asciiArt3(userName):
+def asciiArt3(userName):
     ascii_art = pyfiglet.figlet_format("Riddles")
     print(purpleText, ascii_art, reset)
     print("Welcome to 'Riddles'!")
@@ -53,57 +52,47 @@ randomMedium2 = "What can you catch but not throw?;A cold!"
 
 randomHard1   = "Why are As like flowers?;Because Bs come after them"
 randomHard2   = "What has to be broken before you can use it?;An egg!"
-randomHard3   = " During what month do people sleep the least?;February. It's the shortest month!"
+randomHard3   = "During what month do people sleep the least?;February. It's the shortest month!"
 
 
 # Categorizing the chosen riddles in lists
 def startGame3(userName):
-    catagorie = int(input(f"{userName} What catagory would you like? (Numbers only!)\n{blueText}| Animals [1] | Objects [2] | Random [3] |{reset} "))
-    if   catagorie == 1: # Catagory Animals
-        difficulty  = int(input(f"What dificulty do you want to play on? (Numbers only!)\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} "))
-        if   difficulty == 1:
+    catagorie  = 0
+    difficulty = 0
+
+    while catagorie not in ['animals', '1', 'objects', '2', 'random', '3']: # Ask again, until it is a valid option
+        catagorie = input(f"{userName} What category would you like?\n{blueText}| Animals [1] | Objects [2] | Random [3] |{reset} ").lower()
+
+    if   catagorie == '1' or catagorie == 'animals': # Catagory Animals
+        while difficulty not in ['1', '2', '3', 'easy', 'medium', 'hard']: # Ask again, until it is a valid option
+            difficulty  = input(f"What dificulty do you want to play on?\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} ").lower()
+        if   difficulty == '1' or difficulty == 'easy':
             riddles = [animalEasy1, animalEasy2, animalEasy3] # Easy riddles
-            playGame(riddles)
-        elif difficulty == 2:
+        elif difficulty == '2' or difficulty == 'medium':
             riddles = [animalMedium1, animalMedium2]          # Medium riddles
-            playGame(riddles)
-        elif difficulty == 3:
+        elif difficulty == '3' or difficulty == 'hard':
             riddles = [animalHard1, animalHard2, animalHard3] # Hard riddles
-            playGame(riddles)
-        else:
-            print(f"{redText}Difficulty level not found{reset}")
-            startGame3(userName) # Ask again
-    elif catagorie == 2: # Catagory Objects
-        difficulty  = int(input(f"What dificulty do you want to play on? (Numbers only!)\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} "))
-        if   difficulty == 1:
+
+    elif catagorie == '2' or catagorie == 'objects': # Catagory Objects
+        while difficulty not in ['1', '2', '3', 'easy', 'medium', 'hard']: # Ask again, until it is a valid option
+            difficulty  = input(f"What dificulty do you want to play on?\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} ").lower()
+        if   difficulty == '1' or difficulty == 'easy':
             riddles = [objectEasy1, objectEasy2]                    # Easy riddles
-            playGame(riddles)
-        elif difficulty == 2:
+        elif difficulty == '2' or difficulty == 'medium':
             riddles = [objectMedium1, objectMedium2, objectMedium3] # Medium riddles
-            playGame(riddles)
-        elif difficulty == 3:
+        elif difficulty == '3' or difficulty == 'hard':
             riddles = [objectHard1, objectHard2, objectHard3]       # Hard riddles
-            playGame(riddles)
-        else:
-            print(f"{redText}Difficulty level not found{reset}")
-            startGame3(userName) # Ask again
-    elif catagorie == 3: # Catagory Random
-        difficulty  = int(input(f"What dificulty do you want to play on? (Numbers only!)\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} "))
-        if   difficulty == 1:
+
+    elif catagorie == '3' or catagorie == 'random': # Catagory Random
+        while difficulty not in ['1', '2', '3', 'easy', 'medium', 'hard']: # Ask again, until it is a valid option
+            difficulty  = input(f"What dificulty do you want to play on?\n{blueText}| Easy [1] | Medium [2] | Hard [3] |{reset} ").lower()
+        if   difficulty == '1' or difficulty == 'easy':
             riddles = [randomEasy1, randomEasy2, randomEasy3] # Easy riddles
-            playGame(riddles)
-        elif difficulty == 2:
+        elif difficulty == '2' or difficulty == 'medium':
             riddles = [randomMedium1, randomMedium2]          # Medium riddles
-            playGame(riddles)
-        elif difficulty == 3:
+        elif difficulty == '3' or difficulty == 'hard':
             riddles = [randomHard1, randomHard2, randomHard3] # Hard riddles
-            playGame(riddles)
-        else:
-            print(f"{redText}Difficulty level not found{reset}")
-            startGame3(userName) # Ask again
-    else:
-        print(f"{redText}Catagory not found{reset}")
-        startGame3(userName) # Ask again
+    playGame(riddles)
 
 
 # All the game logic
@@ -125,22 +114,3 @@ def playGame(riddles):
             continueRiddles = input("Do you want another riddle? ").lower()
             if continueRiddles == 'no':
                 break # Exit the loop
-        
-    
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
